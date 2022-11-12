@@ -1,8 +1,9 @@
 //import checkNumInput from "./checkNumInput";
 
-const forms = (state) => {
+const forms = () => {
    const form = document.querySelectorAll('form'),
-         inputs = document.querySelectorAll('input');
+         inputs = document.querySelectorAll('input'),
+         upload = document.querySelectorAll("[name='upload']");
 
   // checkNumInput('input[name="user_phone"]');
 
@@ -14,14 +15,15 @@ const forms = (state) => {
       ok: 'assets/img/ok.png',
       fail: 'assets/img/fail.png', 
    };
+   
+   const path = {
+      designer: 'assets/server.php',
+      question: 'assets/question.php',
+   };
 
    const postData = async (url, data) => {
-      //document.querySelector('.status').innerHTML = message.loading;
       let res = await fetch(url, {
-         method: 'POST', 
-         //headers: {
-         //   'content-type': 'application/json',
-         //} в случае, если данные передаются в формате Json
+         method: 'POST',
          body: data
       });
 
@@ -32,48 +34,67 @@ const forms = (state) => {
       inputs.forEach(item => {
          item.value = '';
       });
+      upload.forEach(item => {
+         item.previousElementSibling.textContent = 'Файл не выбран';
+      });
    }; 
+
+   upload.forEach(item => {
+      item.addEventListener('input', ()=>{
+         let dots;
+         let arr = item.files[0].name.split('.');
+         (arr[0].length > 5) ? (dots = '...') : (dots = '.');
+         let name = arr[0].slice(0, 5) + dots + arr[1];
+         item.previousElementSibling.textContent = name;
+      });
+   });
+     
    form.forEach(item => {
       item.addEventListener('submit', (e) => {
          e.preventDefault();
          
          let statusMessage = document.createElement('div');
          statusMessage.classList.add('status');
-         item.classList.add('fadeOutUp'); /////////
+         item.classList.add('animated', 'fadeOutUp');
          setTimeout(() => {
             item.style.display = 'none';
          }, 400);
          item.parentNode.appendChild(statusMessage);
-         statusMessage.classList.add('fadeInUp'); ///////
+
          let statusImg = document.createElement('img');
          statusImg.setAttribute('src', message.spinner);
+         statusImg.classList.add('animated', 'fadeInUp');
          statusMessage.appendChild(statusImg);
+
+
          let statusText = document.createElement('div');
          statusText.textContent = message.loading;
          statusMessage.appendChild(statusText);
 
-         const formData =  new FormData(item);
+         const formData =  new FormData(item); 
+         let api;
 
-         postData('assets/server.php', formData)
+         item.closest('.popup-design') || item.classList.contains('form-calc') ? api = path.designer : api = path.question;
+         console.log(api);
+
+         postData(api, formData)
             .then(res => {
                console.log(res);
-               statusMessage.innerHTML = message.success;
+               statusImg.setAttribute('src', message.ok);
+               statusText.textContent = message.success;
             })
             .catch(() => {
-               statusMessage.innerHTML = message.failure;
+               statusImg.setAttribute('src', message.fail);
+               statusText.textContent = message.failure;
             })
             .finally(() => {
                clearInputs();
                setTimeout(() => {
                   statusMessage.remove();
+                  item.style.display = 'block';
+                  item.classList.remove('fadeOutUp');
+                  item.classList.add('fadeInUp');
                }, 5000);
-               if (item.getAttribute('data-calc') === 'end') {
-                  setTimeout(() => {
-                     document.querySelectorAll('[data-modal]').forEach(item => {
-                        item.style.display = 'none';
-                     });
-               }, 5000);
-               }
             });
       });
    });

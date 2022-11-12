@@ -8,5 +8,5 @@ window.addEventListener('DOMContentLoaded', () => {
    modals();
    sliders('.main-slider-item', 'vertical');
    sliders('.feedback-slider-item', 'gorizontal', '.main-prev-btn', '.main-next-btn');
-   
+   forms();
 });
