@@ -1120,32 +1120,31 @@ var sliders = function sliders(slideSelector, dir, prev, next) {
       }
     });
   } catch (error) {}
+  /*    let paused = setInterval(() => {
+        slideIndex++;
+        showSlide(slideIndex);
+        if (dir === 'vertical') {
+           slides[slideIndex-1].classList.add('slideInDown');
+        } else {
+           slides[slideIndex-1].classList.add('slideInRight');
+        }
+     }, 3000);
+  
+     slides[0].parentNode.addEventListener('mouseenter', () => {
+        clearInterval(paused);
+     });
+     slides[0].parentNode.addEventListener('mouseleave', () => {
+        paused = setInterval(() => {
+        slideIndex++;
+        showSlide(slideIndex);
+        if (dir === 'vertical') {
+           slides[slideIndex-1].classList.add('slideInDown');
+        } else {
+           slides[slideIndex-1].classList.add('slideInRight');
+        }
+     }, 3000);
+     });*/
 
-  var paused = setInterval(function () {
-    slideIndex++;
-    showSlide(slideIndex);
-
-    if (dir === 'vertical') {
-      slides[slideIndex - 1].classList.add('slideInDown');
-    } else {
-      slides[slideIndex - 1].classList.add('slideInRight');
-    }
-  }, 3000);
-  slides[0].parentNode.addEventListener('mouseenter', function () {
-    clearInterval(paused);
-  });
-  slides[0].parentNode.addEventListener('mouseleave', function () {
-    paused = setInterval(function () {
-      slideIndex++;
-      showSlide(slideIndex);
-
-      if (dir === 'vertical') {
-        slides[slideIndex - 1].classList.add('slideInDown');
-      } else {
-        slides[slideIndex - 1].classList.add('slideInRight');
-      }
-    }, 3000);
-  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (sliders);
