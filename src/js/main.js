@@ -12,5 +12,5 @@ window.addEventListener('DOMContentLoaded', () => {
    sliders('.feedback-slider-item', 'gorizontal', '.main-prev-btn', '.main-next-btn');
    forms();
    mask('[name="phone"]');
-   showMoreStyles('.button-styles', '.styles-2');
+   showMoreStyles('.button-styles', '#styles .row');
 });
