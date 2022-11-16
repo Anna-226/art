@@ -4,9 +4,12 @@ import forms from './modules/forms';
 import mask from './modules/mask';
 import showMoreStyles from './modules/showMoreStyles';
 import calc from './modules/calc';
+import filter from './modules/filter';
 
 window.addEventListener('DOMContentLoaded', () => {
    'use strict';
+
+   let calcState = {};
 
    modals();
    sliders('.main-slider-item', 'vertical');
@@ -14,5 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
    forms();
    mask('[name="phone"]');
    showMoreStyles('.button-styles', '#styles .row');
-   calc('#size', '#material', '#options', '.promocode', '.calc-price');
+   calc('#size', '#material', '#options', '.promocode', '.calc-price', calcState);
+   filter();
 });
