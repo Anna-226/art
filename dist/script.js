@@ -4446,58 +4446,77 @@ __webpack_require__.r(__webpack_exports__);
 var filter = function filter() {
   var menuFilter = document.querySelector('.portfolio-menu'),
       allFilter = menuFilter.querySelector('.all'),
-      loversFilter = menuFilter.querySelector('.lovers'),
-      chefFilter = menuFilter.querySelector('.chef'),
-      girlFilter = menuFilter.querySelector('.girl'),
-      guyFilter = menuFilter.querySelector('.guy'),
-      grandmotherFilter = menuFilter.querySelector('.grandmother'),
-      granddadFilter = menuFilter.querySelector('.granddad'),
       wrapper = document.querySelector('.portfolio-wrapper'),
       allPicture = wrapper.querySelectorAll('.all'),
-      girlPicture = wrapper.querySelectorAll('.girl'),
-      loversPicture = wrapper.querySelectorAll('.lovers'),
-      chefPicture = wrapper.querySelectorAll('.chef'),
-      guyPicture = wrapper.querySelectorAll('.guy'),
-      grandmotherPicture = wrapper.querySelectorAll('.grandmother'),
-      granddadPicture = wrapper.querySelectorAll('.granddad');
+      div = document.createElement('div');
 
-  function toFilter(picturesType) {
-    allPicture.forEach(function (item) {
-      item.style.display = 'none';
-    });
-    picturesType.forEach(function (item) {
-      item.style.display = 'block';
-      item.classList.add('animated', 'fadeIn');
-    });
+  function filterPictures(classSelestor) {
+    var btn = menuFilter.querySelector(classSelestor),
+        pictures = wrapper.querySelectorAll(classSelestor);
+    btn.classList.toggle('active');
+
+    if (btn.classList.contains('active')) {
+      pictures.forEach(function (item) {
+        item.style.display = 'block';
+        item.classList.add('animated', 'fadeIn', 'visible');
+      });
+    } else if (!btn.classList.contains('active')) {
+      pictures.forEach(function (item) {
+        item.style.display = 'none';
+        item.classList.remove('animated', 'fadeIn', 'visible');
+      });
+      allFilter.classList.remove('active');
+    }
   }
 
   allFilter.addEventListener('click', function () {
-    toFilter(allPicture);
-    allFilter.classList.add('active');
+    allFilter.classList.toggle('active');
+
+    if (allFilter.classList.contains('active')) {
+      allPicture.forEach(function (item) {
+        item.style.display = 'block';
+        item.classList.add('animated', 'fadeIn');
+      });
+    } else {
+      allPicture.forEach(function (item) {
+        if (!item.classList.contains('visible')) {
+          item.style.display = 'none';
+          item.classList.remove('animated', 'fadeIn');
+        }
+      });
+    }
   });
-  loversFilter.addEventListener('click', function () {
-    toFilter(loversPicture);
-    loversFilter.classList.add('active');
-  });
-  chefFilter.addEventListener('click', function () {
-    toFilter(chefPicture);
-    chefFilter.classList.add('active');
-  });
-  girlFilter.addEventListener('click', function () {
-    toFilter(girlPicture);
-    girlFilter.classList.add('active');
-  });
-  guyFilter.addEventListener('click', function () {
-    toFilter(guyPicture);
-    guyFilter.classList.add('active');
-  });
-  grandmotherFilter.addEventListener('click', function () {
-    toFilter(grandmotherPicture);
-    grandmotherFilter.classList.add('active');
-  });
-  granddadFilter.addEventListener('click', function () {
-    toFilter(granddadPicture);
-    granddadFilter.classList.add('active');
+  /*    if (wrapper.querySelectorAll('.visible').length === 0){
+           wrapper.appendChild(div);
+           div.innerHTML = 'Пока такиех работ мы не выполняли, хотите быть первым?';
+        } */
+
+  menuFilter.addEventListener('click', function (e) {
+    var target = e.target;
+
+    if (target && target.classList.contains('lovers')) {
+      filterPictures('.lovers');
+    }
+
+    if (target && target.classList.contains('chef')) {
+      filterPictures('.chef');
+    }
+
+    if (target && target.classList.contains('girl')) {
+      filterPictures('.girl');
+    }
+
+    if (target && target.classList.contains('guy')) {
+      filterPictures('.guy');
+    }
+
+    if (target && target.classList.contains('grandmother')) {
+      filterPictures('.grandmother');
+    }
+
+    if (target && target.classList.contains('granddad')) {
+      filterPictures('.granddad');
+    }
   });
 };
 
