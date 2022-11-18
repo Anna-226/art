@@ -5,6 +5,7 @@ import mask from './modules/mask';
 import showMoreStyles from './modules/showMoreStyles';
 import calc from './modules/calc';
 import filter from './modules/filter';
+import showPicture from './modules/showPicture';
 
 window.addEventListener('DOMContentLoaded', () => {
    'use strict';
@@ -19,4 +20,5 @@ window.addEventListener('DOMContentLoaded', () => {
    showMoreStyles('.button-styles', '#styles .row');
    calc('#size', '#material', '#options', '.promocode', '.calc-price', calcState);
    filter();
+   showPicture('.sizes-block');
 });
