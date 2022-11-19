@@ -6,6 +6,7 @@ import showMoreStyles from './modules/showMoreStyles';
 import calc from './modules/calc';
 import filter from './modules/filter';
 import showPicture from './modules/showPicture';
+import accorden from './modules/accordeon';
 
 window.addEventListener('DOMContentLoaded', () => {
    'use strict';
@@ -21,4 +22,5 @@ window.addEventListener('DOMContentLoaded', () => {
    calc('#size', '#material', '#options', '.promocode', '.calc-price', calcState);
    filter();
    showPicture('.sizes-block');
+   accorden('.accordion-heading');
 });
