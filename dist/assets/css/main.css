@@ -925,6 +925,7 @@ h4 {
   opacity: 1;
   padding: 3rem 4rem;
   margin-top: 1rem;
+  max-height: auto;
 }
 .often-questions .accordion-block:before {
   content: '';

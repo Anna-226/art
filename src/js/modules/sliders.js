@@ -45,7 +45,7 @@ const sliders = (slideSelector, dir, prev, next) => {
       });
    } catch (error) {
    }
-/*    let paused = setInterval(() => {
+   let paused = setInterval(() => {
       slideIndex++;
       showSlide(slideIndex);
       if (dir === 'vertical') {
@@ -68,7 +68,7 @@ const sliders = (slideSelector, dir, prev, next) => {
          slides[slideIndex-1].classList.add('slideInRight');
       }
    }, 3000);
-   });*/
+   });
 }; 
 
 export default sliders;
