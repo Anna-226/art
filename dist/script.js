@@ -4355,6 +4355,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_showPicture__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/showPicture */ "./src/js/modules/showPicture.js");
 /* harmony import */ var _modules_accordeon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/accordeon */ "./src/js/modules/accordeon.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_scrolling__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/scrolling */ "./src/js/modules/scrolling.js");
+
 
 
 
@@ -4380,6 +4382,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_showPicture__WEBPACK_IMPORTED_MODULE_7__["default"])('.sizes-block');
   Object(_modules_accordeon__WEBPACK_IMPORTED_MODULE_8__["default"])('.accordion-heading');
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_9__["default"])('.burger-menu', '.burger');
+  Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_10__["default"])();
 });
 
 /***/ }),
@@ -4895,6 +4898,23 @@ var modal = function modal() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modal);
+
+/***/ }),
+
+/***/ "./src/js/modules/scrolling.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/scrolling.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var scrolling = function scrolling() {
+  window.addEventListener('scroll', function () {});
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scrolling);
 
 /***/ }),
 
