@@ -4356,6 +4356,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_accordeon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/accordeon */ "./src/js/modules/accordeon.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
 /* harmony import */ var _modules_scrolling__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/scrolling */ "./src/js/modules/scrolling.js");
+/* harmony import */ var _modules_drop__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/drop */ "./src/js/modules/drop.js");
+
 
 
 
@@ -4383,6 +4385,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_accordeon__WEBPACK_IMPORTED_MODULE_8__["default"])('.accordion-heading');
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_9__["default"])('.burger-menu', '.burger');
   Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_10__["default"])('.pageup');
+  Object(_modules_drop__WEBPACK_IMPORTED_MODULE_11__["default"])();
 });
 
 /***/ }),
@@ -4503,6 +4506,82 @@ var calc = function calc(size, material, options, promocode, result, state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
+
+/***/ }),
+
+/***/ "./src/js/modules/drop.js":
+/*!********************************!*\
+  !*** ./src/js/modules/drop.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var drop = function drop() {
+  var inputs = document.querySelectorAll('[name="upload"]');
+  ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(function (eventName) {
+    inputs.forEach(function (input) {
+      input.addEventListener(eventName, preventDefaults, false);
+    });
+  });
+
+  function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  ['dragenter', 'dragover'].forEach(function (eventName) {
+    inputs.forEach(function (input) {
+      input.addEventListener(eventName, function () {
+        highLighter(input);
+      }, false);
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (eventName) {
+    inputs.forEach(function (input) {
+      input.addEventListener(eventName, function () {
+        unhighLighter(input);
+      }, false);
+    });
+  });
+
+  function highLighter(input) {
+    input.closest('.file_upload').style.backgroundColor = '#cebfa8';
+    input.closest('.file_upload').style.border = '1px solid red';
+  }
+
+  function unhighLighter(input) {
+    input.closest('.file_upload').style.backgroundColor = 'inherit';
+    input.closest('.file_upload').style.border = 'none';
+  }
+
+  inputs.forEach(function (input) {
+    input.addEventListener('drop', function (e) {
+      input.files = e.dataTransfer.files;
+      var dots;
+      var arr = input.files[0].name.split('.');
+      arr[0].length > 5 ? dots = '...' : dots = '.';
+      var name = arr[0].slice(0, 5) + dots + arr[1];
+      input.previousElementSibling.textContent = name;
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (drop);
 
 /***/ }),
 
@@ -4910,11 +4989,10 @@ var modal = function modal() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
-/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
 
 
-//import { from } from "core-js/core/array";
 var scrolling = function scrolling(upSelector) {
   var upBtn = document.querySelector(upSelector);
   window.addEventListener('scroll', function () {
@@ -4925,54 +5003,80 @@ var scrolling = function scrolling(upSelector) {
       upBtn.classList.add('fadeOut');
       upBtn.classList.remove('fadeIn');
     }
-  });
+  }); //scrolling with raf
 
-  var calcScroll = function calcScroll() {
-    upBtn.addEventListener('click', function (e) {
-      var scrollTop = Math.round(document.body.scrollTop || document.documentElement.scrollTop);
+  var links = document.querySelectorAll('[href^="#"]'),
+      speed = 0.1;
+  links.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      var widthTop = Math.round(document.documentElement.scrollTop || document.body.scrollTop),
+          hash = this.hash,
+          toBlock = document.querySelector(hash).getBoundingClientRect().top,
+          start = null;
+      requestAnimationFrame(step);
 
-      if (this.hash !== '') {
-        e.preventDefault();
-        var hashElement = document.querySelector(this.hash),
-            hashElementTop = 0;
-
-        while (hashElement.offsetParent) {
-          hashElementTop += hashElement.offsetTop;
-          hashElement = hashElement.offsetParent;
+      function step(time) {
+        if (start === null) {
+          start = time;
         }
 
-        hashElementTop = Math.round(hashElementTop);
-        smoothScroll(scrollTop, hashElementTop, this.hash);
+        var progress = time - start,
+            r = toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock);
+        document.documentElement.scrollTo(0, r);
+
+        if (r != widthTop + toBlock) {
+          requestAnimationFrame(step);
+        } else {
+          location.hash = hash;
+        }
       }
     });
-  };
+  }); //scrolling with setinterval
 
-  var smoothScroll = function smoothScroll(from, to, hash) {
-    var timeInterval = 1,
-        prevScrollTop,
-        speed;
-
-    if (to > from) {
-      speed = 30;
-    } else {
-      speed = -30;
-    }
-
-    var move = setInterval(function () {
-      var scrollTop = Math.round(document.body.scrollTop || document.documentElement.scrollTop);
-
-      if (prevScrollTop === scrollTop || to > from && scrollTop >= to || to < from && scrollTop <= to) {
-        clearInterval(move);
-        history.replaceState(history.state, document.title, location.href.replace(/#.*$/g, '') + hash);
-      } else {
-        document.body.scrollTop += speed;
-        document.documentElement.scrollTop += speed;
-        prevScrollTop = scrollTop;
-      }
-    }, timeInterval);
-  };
-
-  calcScroll();
+  /*    const calcScroll = () => {
+        upBtn.addEventListener('click', function(e) {
+           let scrollTop = Math.round(document.body.scrollTop || document.documentElement.scrollTop);
+           if (this.hash !== '') {
+              e.preventDefault();
+              let hashElement = document.querySelector(this.hash),
+                  hashElementTop = 0;
+              while (hashElement.offsetParent) {
+                 hashElementTop += hashElement.offsetTop;
+                 hashElement = hashElement.offsetParent;
+              }
+              hashElementTop = Math.round(hashElementTop);
+              smoothScroll(scrollTop, hashElementTop, this.hash);
+           }
+        });
+     };
+     const smoothScroll = (from, to, hash) => {
+        let timeInterval = 1,
+            prevScrollTop,
+            speed;
+        if (to > from) {
+           speed = 30;
+        } else {
+           speed = -30;
+        }
+     
+        let move = setInterval(function() {
+           let scrollTop = Math.round(document.body.scrollTop || document.documentElement.scrollTop);
+           if (
+              prevScrollTop === scrollTop ||
+              (to > from && scrollTop >= to) ||
+              (to < from && scrollTop <= to)
+           ) {
+              clearInterval(move);
+              history.replaceState(history.state, document.title, location.href.replace(/#.*$/g, '') + hash);
+           } else {
+              document.body.scrollTop += speed;
+              document.documentElement.scrollTop += speed;
+              prevScrollTop = scrollTop;
+           }
+        }, timeInterval);
+     };
+     calcScroll(); */
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (scrolling);
